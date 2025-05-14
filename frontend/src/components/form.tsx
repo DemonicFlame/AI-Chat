@@ -3,14 +3,14 @@ import axios from "axios";
 import type { Question } from "../types/api";
 import type { Answer } from "../types/api";
 
-const API_URL = "http://localhost:8000/ask/";
+const API_URL = "http://localhost:8000/ask3/";
 
 const Form = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setAnswer("");

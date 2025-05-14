@@ -6,11 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173/",
-    "http://localhost:3000/",
-    "https://yourfrontenddomain.com/",
-]
+origins = []
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -20,10 +16,10 @@ app.add_middleware(
 )
 
 
-@app.post("/ask", response_model=AskResponse)
-async def ask(request: AskRequest):
-    response = await get_answer(request.question)
-    return AskResponse(answer=response)
+# @app.post("/ask", response_model=AskResponse)
+# async def ask(request: AskRequest):
+#     response = await get_answer(request.question)
+#     return AskResponse(answer=response)
 
 
 @app.post("/ask3", response_model=AskResponse)
