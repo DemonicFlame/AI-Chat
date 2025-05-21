@@ -1,0 +1,30 @@
+.message {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+  max-width: 70%;
+}
+
+.userMessage {
+  background-color: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.llmMessage {
+  background-color: #f1f1f1;
+  color: #000;
+  align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+  .message {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .message {
+    max-width: 90%;
+  }
+}

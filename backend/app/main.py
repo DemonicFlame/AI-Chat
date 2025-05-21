@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.schemas.model import AskRequest, AskResponse
-from app.ai import get_answer, get_answer3
+from app.ai import get_answer3
 from langchain_core.messages import HumanMessage
 from fastapi.middleware.cors import CORSMiddleware
 

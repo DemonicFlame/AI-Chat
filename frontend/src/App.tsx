@@ -1,10 +1,10 @@
 import "./App.css";
-import Form from "./components/form";
+import Chat from "./components/chat";
 
 function App() {
   return (
     <div>
-      <Form />
+      <Chat />
     </div>
   );
 }
