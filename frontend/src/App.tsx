@@ -3,7 +3,7 @@ import Chat from "./components/chat";
 
 function App() {
   return (
-    <div>
+    <div style={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
       <Chat />
     </div>
   );
