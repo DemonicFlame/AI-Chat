@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Request
-from app.schemas.model import AskRequest, AskResponse
-from app.ai import get_answer
+from fastapi import FastAPI
+
+# from app.ai import get_answer
 
 # from langchain_core.messages import HumanMessage
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+
+# from fastapi.responses import StreamingResponse
+from app.users import router as user_router
+from app.chat import router as chat_router
 
 app = FastAPI()
 
@@ -17,23 +20,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-async def stream_response(question: str):
-    async for chunk in get_answer(question):
-        yield chunk
+app.include_router(user_router)
+app.include_router(chat_router)
 
 
-@app.post("/ask")
-async def ask(request: Request):
-    body = await request.json()
-    question = body.get("question", "")
-    return StreamingResponse(stream_response(question), media_type="text/plain")
-    # response = await get_answer(request.question)
-    # return AskResponse(answer=response)
+# async def stream_response(question: str):
+#     async for chunk in get_answer(question):
+#         yield chunk
 
 
-# @app.post("/ask3", response_model=AskResponse)
-# async def ask3(request: AskRequest):
-#     llm = get_answer3()
-#     response = await llm.ainvoke([HumanMessage(content=request.question)])
-#     return AskResponse(answer=response.content)
+# @app.post("/ask")
+# async def ask(request: Request):
+#     body = await request.json()
+#     question = body.get("question", "")
+#     return StreamingResponse(stream_response(question), media_type="text/plain")
