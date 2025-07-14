@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Message as MessageType } from "../types/message";
 import styles from "./chat.module.css";
 import { MessageComponent } from "./message.tsx";
+import { useAuth } from "../context/AuthContext.tsx";
 
 const API_URL = "http://localhost:8000/ask";
 
@@ -9,6 +10,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const { token } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,10 @@ const Chat = () => {
     try {
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ question: input }),
       });
 
