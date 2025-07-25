@@ -12,7 +12,7 @@ async def register(user: UserCreate):
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_pw = hash_password(user.pasword)
+    hashed_pw = hash_password(user.password)
     user_doc = {"email": user.email, "password": hashed_pw}
     result = await users_collection.insert_one(user_doc)
 

@@ -31,7 +31,7 @@ async def ask_question(request: Request, user_id: str = Depends(get_current_user
     async def gen():
         answer = get_answer(question)
         full = ""
-        for chunk in answer:
+        async for chunk in answer:
             full += chunk
             yield chunk
         chat_msg = ChatMessage(
@@ -54,3 +54,9 @@ async def get_history(user_id: str = Depends(get_current_user)):
         msg["user_id"] = str(msg["user_id"])
         history.append(ChatMessage(**msg))
     return history
+
+
+@router.delete("/history")
+async def delete_history(user_id: str = Depends(get_current_user)):
+    await messages_collection.delete_many({"user_id": ObjectId(user_id)})
+    return {"message": "History deleted successfully"}
