@@ -3,7 +3,7 @@ const GoogleLoginButton = () => {
     window.location.href = "http://localhost:8000/auth/google-login";
   };
 
-  return <button onClick={handleLogin}>Sign in with Google</button>;
+  return <button onClick={handleLogin}>Google</button>;
 };
 
 export default GoogleLoginButton;

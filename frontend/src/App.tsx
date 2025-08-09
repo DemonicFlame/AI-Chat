@@ -4,28 +4,30 @@ import GoogleLoginButton from "./components/GoogleLoginButton";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { useAuth } from "./context/AuthContext";
+import styles from "./authpage.module.css";
 
 function App() {
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
 
   if (!token) {
     return (
-      <div style={{ padding: "2rem" }}>
-        <h1>Welcome to AI Chat</h1>
-        <p>Please log in or register to continue.</p>
-        <Register />
-        <Login />
-        <h2>OR</h2>
-        <GoogleLoginButton />
+      <div className={styles.authContainer}>
+        <div className={styles.authComponent}>
+          <Login />
+        </div>
+        <div className={styles.authComponent}>
+          <Register />
+        </div>
+        <div className={styles.authComponent}>
+          <h2>Quick Sign-in</h2>
+          <GoogleLoginButton />
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
-      <button onClick={logout} style={{ float: "right" }}>
-        Logout
-      </button>
+    <div>
       <Chat />
     </div>
   );

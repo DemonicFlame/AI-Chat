@@ -5,7 +5,7 @@
   max-width: 75%;
   word-wrap: break-word;
   line-height: 1.5;
-  font-size: 0.95rem;
+  font-size: 1.125rem;
   position: relative;
   animation: messageSlideIn 0.3s ease-out;
 }
@@ -22,7 +22,8 @@
 }
 
 .userMessage {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background: black;
   color: #ffffff;
   align-self: flex-end;
   margin-left: auto;
@@ -37,7 +38,8 @@
   right: -8px;
   width: 0;
   height: 0;
-  border-left: 8px solid #764ba2;
+  /* border-left: 8px solid #764ba2; */
+  border-left: 8px solid black;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -64,161 +66,32 @@
   border-bottom: 8px solid transparent;
 }
 
-/* .llmMessage h1,
-.llmMessage h2,
-.llmMessage h3,
-.llmMessage h4,
-.llmMessage h5,
-.llmMessage h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #1f2937;
-  font-weight: 600;
-}
-
-.llmMessage h1 {
-  font-size: 1.5rem;
-}
-
-.llmMessage h2 {
-  font-size: 1.25rem;
-}
-
-.llmMessage h3 {
-  font-size: 1.125rem;
-}
-
-.llmMessage p {
-  margin-bottom: 0.75rem;
-  line-height: 1.6;
-}
-
 .llmMessage ul,
 .llmMessage ol {
-  margin-left: 1.5rem;
-  margin-bottom: 0.75rem;
+  padding-inline-start: 1.25rem;
+  margin: 0.5rem 0;
+  list-style-position: outside;
 }
 
 .llmMessage li {
-  margin-bottom: 0.25rem;
+  margin: 0.35rem 0;
+  line-height: 1.45;
 }
 
-.llmMessage code {
-  background-color: rgba(139, 92, 246, 0.1);
-  color: #7c3aed;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
-    "Courier New", monospace;
-  font-size: 0.875rem;
+.llmMessage ul ul,
+.llmMessage ol ol {
+  padding-inline-start: 1rem;
 }
-
-.llmMessage pre {
-  background-color: #1f2937;
-  color: #f9fafb;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin: 0.75rem 0;
-  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
-    "Courier New", monospace;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-.llmMessage pre code {
-  background: none;
-  color: inherit;
-  padding: 0;
-}
-
-.llmMessage blockquote {
-  border-left: 4px solid #667eea;
-  margin-left: 0;
-  padding-left: 1rem;
-  color: #6b7280;
-  font-style: italic;
-}
-
-.llmMessage table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0.75rem 0;
-}
-
-.llmMessage th,
-.llmMessage td {
-  border: 1px solid #e5e7eb;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-.llmMessage th {
-  background-color: #f9fafb;
-  font-weight: 600;
-}
-
-.llmMessage a {
-  color: #667eea;
-  text-decoration: underline;
-}
-
-.llmMessage a:hover {
-  color: #764ba2;
-}
-
-.llmMessage strong {
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.llmMessage em {
-  font-style: italic;
-} */
 
 @media (min-width: 768px) {
   .message {
     max-width: 85%;
-    padding: 0.875rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .llmMessage pre {
-    font-size: 0.8rem;
-    padding: 0.75rem;
-  }
-
-  .llmMessage code {
-    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .message {
     max-width: 90%;
-    padding: 0.75rem 0.875rem;
-    font-size: 0.875rem;
-  }
-
-  .llmMessage h1 {
-    font-size: 1.25rem;
-  }
-
-  .llmMessage h2 {
-    font-size: 1.125rem;
-  }
-
-  .llmMessage h3 {
-    font-size: 1rem;
-  }
-
-  .llmMessage pre {
-    font-size: 0.75rem;
-    padding: 0.625rem;
-  }
-
-  .llmMessage code {
-    font-size: 0.75rem;
   }
 }
 
@@ -231,6 +104,5 @@
 @media (min-width: 1200px) {
   .message {
     max-width: 65%;
-    padding: 1.25rem 1.5rem;
   }
 }

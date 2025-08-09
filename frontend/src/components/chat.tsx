@@ -10,7 +10,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -68,20 +68,37 @@ const Chat = () => {
 
       // setMessages((prev) => [...prev, { content: "", isUser: false }]);
 
+      // while (true) {
+      //   const { done, value } = await reader.read();
+      //   if (done) break;
+
+      //   const chunk = decoder.decode(value, { stream: true });
+      //   completeMessage += chunk;
+
+      //   setMessages((prev) => {
+      //     const last = prev[prev.length - 1];
+      //     if (!last || last.isUser) {
+      //       return [...prev, { content: chunk, isUser: false }];
+      //     } else {
+      //       const updated = [...prev];
+      //       updated[updated.length - 1].content += chunk;
+      //       return updated;
+      //     }
+      //   });
+      //   scrollToBottom();
+      // }
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
         const chunk = decoder.decode(value, { stream: true });
         completeMessage += chunk;
-
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (!last || last.isUser) {
             return [...prev, { content: chunk, isUser: false }];
           } else {
             const updated = [...prev];
-            updated[updated.length - 1].content += chunk;
+            updated[updated.length - 1].content = completeMessage;
             return updated;
           }
         });
@@ -112,13 +129,19 @@ const Chat = () => {
     <div className={styles.chatWrapper}>
       <div className={styles.container}>
         <div>
-          <h2>Chat</h2>
           <button
             onClick={deleteHistory}
             disabled={loading}
             className={styles.button}
           >
             New Chat
+          </button>
+          <button
+            onClick={logout}
+            style={{ float: "right" }}
+            className={styles.button}
+          >
+            Logout
           </button>
         </div>
 

@@ -1,0 +1,205 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.authContainer {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.authComponent {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0;
+  padding: 40px;
+  min-width: 300px;
+  max-width: 350px;
+  flex: 1;
+  box-shadow: 8px 8px 0px #000000;
+  transition: all 0.3s ease;
+}
+
+.authComponent:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px #000000;
+}
+
+.authComponent h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #000000;
+  padding-bottom: 10px;
+}
+
+.authComponent input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #000000;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.authComponent input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.1);
+  transform: translate(1px, 1px);
+}
+
+.authComponent input::placeholder {
+  color: #666666;
+  font-weight: 400;
+}
+
+.authComponent button {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #000000;
+  border-radius: 0;
+  background: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.authComponent button:hover:not(:disabled) {
+  background: #ffffff;
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.authComponent button:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.authComponent button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .authContainer {
+    gap: 30px;
+  }
+
+  .authComponent {
+    min-width: 280px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .authContainer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .authComponent {
+    min-width: 100%;
+    max-width: 400px;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .authComponent {
+    padding: 20px;
+  }
+
+  .authComponent h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .authComponent input,
+  .authComponent button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Loading state animation */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.authComponent button:disabled {
+  animation: pulse 1.5s infinite;
+}
+
+.authComponent input:focus,
+.authComponent button:focus {
+  outline: 3px solid rgba(0, 0, 0, 0.3);
+  outline-offset: 2px;
+}
+
+.authComponent input:hover {
+  border-color: #333333;
+}
+
+.authComponent input.error {
+  border-color: #000000;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+}
+
+.authComponent input.success {
+  border-color: #000000;
+  box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.1);
+}

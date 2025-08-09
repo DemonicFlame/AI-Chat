@@ -36,6 +36,7 @@ const Register = () => {
       <input
         type="email"
         name="email"
+        autoComplete="off"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
@@ -43,6 +44,7 @@ const Register = () => {
       <input
         type="password"
         name="password"
+        autoComplete="off"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
@@ -50,6 +52,7 @@ const Register = () => {
       <input
         type="password"
         name="confirmPassword"
+        autoComplete="off"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         placeholder="Confirm Password"
