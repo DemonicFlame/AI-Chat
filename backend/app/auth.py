@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from jose import jwt, JWTError
+from jose import ExpiredSignatureError, jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 import os
@@ -18,15 +18,17 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-def create_access_token(data: dict, expires_minutes=60):
+def create_access_token(data: dict, expires_minutes=10):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
-    to_encode.update({"exp": expire})
+    to_encode.update({"exp": int(expire.timestamp())})
     return jwt.encode(to_encode, JWT_Secret, algorithm=JWT_ALGORITHM)
 
 
 def decode_access_token(token: str):
     try:
         return jwt.decode(token, JWT_Secret, algorithms=[JWT_ALGORITHM])
+    # except ExpiredSignatureError:
+    #     return None
     except JWTError:
         return None

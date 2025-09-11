@@ -1,13 +1,28 @@
-//import "./App.css";
 import Chat from "./components/chat";
 import GoogleLoginButton from "./components/GoogleLoginButton";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { useAuth } from "./context/AuthContext";
 import styles from "./authpage.module.css";
+import { useAuth } from "./context/AuthContext";
+import { useEffect } from "react";
 
 function App() {
-  const { token } = useAuth();
+  const { token, setToken, isAuthenticating } = useAuth();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenParam =
+      params.get("token") || localStorage.getItem("token") || null;
+    if (!tokenParam) return;
+    (async () => {
+      await setToken(tokenParam);
+      window.history.replaceState({}, document.title, "/");
+    })();
+  }, [setToken]);
+
+  if (isAuthenticating) {
+    return <div>Loading...</div>;
+  }
 
   if (!token) {
     return (

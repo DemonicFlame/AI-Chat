@@ -1,33 +1,97 @@
-import { createContext, useState, useContext } from "react";
+import {
+  createContext,
+  useState,
+  useContext,
+  type ReactNode,
+  useCallback,
+  useEffect,
+} from "react";
 
 interface AuthContextType {
   token: string | null;
-  setToken: (token: string | null) => void;
+  isAuthenticating: boolean;
+  setToken: (token: string | null) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+const verifyEndpoint = "http://localhost:8000/auth/verify";
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setTokenState] = useState<string | null>(
-    localStorage.getItem("token")
+    typeof window !== "undefined" ? localStorage.getItem("token") : null
   );
 
-  const setToken = (token: string | null) => {
-    if (token) {
-      localStorage.setItem("token", token);
-    } else {
-      localStorage.removeItem("token");
-    }
-    setTokenState(token);
-  };
+  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
 
-  const logout = () => {
-    setToken(null);
-  };
+  const logout = useCallback(() => {
+    setTokenState(null);
+    try {
+      localStorage.removeItem("token");
+      console.log("token removed from localStorage");
+    } catch (error) {
+      console.log("can't remove token from localStorage");
+    }
+  }, []);
+
+  const validateToken = useCallback(async (t: string) => {
+    try {
+      const res = await fetch(verifyEndpoint, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${t}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Token validated. Status:", res.status);
+      return res.ok;
+    } catch (error) {
+      console.log("Token not validated");
+      return false;
+    }
+  }, []);
+
+  const setToken = useCallback(
+    async (t: string | null) => {
+      if (!t) {
+        logout();
+        return;
+      }
+      const isValid = await validateToken(t);
+      if (isValid) {
+        setTokenState(t);
+        try {
+          localStorage.setItem("token", t);
+        } catch (error) {}
+      } else {
+        logout();
+      }
+    },
+    [validateToken, logout]
+  );
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const raw = localStorage.getItem("token");
+      if (!raw) {
+        if (mounted) setIsAuthenticating(false);
+        return;
+      }
+      const isValid = await validateToken(raw);
+      if (!mounted) return;
+      if (!isValid) logout();
+      else setTokenState(raw);
+      setIsAuthenticating(false);
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [validateToken, logout]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken, logout }}>
+    <AuthContext.Provider value={{ token, isAuthenticating, setToken, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,15 +1,18 @@
 from fastapi import FastAPI
-
-# from app.ai import get_answer
-
-# from langchain_core.messages import HumanMessage
+from dotenv import load_dotenv
+import os
 from fastapi.middleware.cors import CORSMiddleware
-
-# from fastapi.responses import StreamingResponse
+from starlette.middleware.sessions import SessionMiddleware
 from app.users import router as user_router
 from app.chat import router as chat_router
+from app.google_oauth import router as google_oauth_router
+from app.verify import router as verify_router
 
 app = FastAPI()
+load_dotenv()
+
+key = os.getenv("SECRET_KEY")
+app.add_middleware(SessionMiddleware, secret_key=key)
 
 origins = []
 app.add_middleware(
@@ -22,15 +25,5 @@ app.add_middleware(
 
 app.include_router(user_router)
 app.include_router(chat_router)
-
-
-# async def stream_response(question: str):
-#     async for chunk in get_answer(question):
-#         yield chunk
-
-
-# @app.post("/ask")
-# async def ask(request: Request):
-#     body = await request.json()
-#     question = body.get("question", "")
-#     return StreamingResponse(stream_response(question), media_type="text/plain")
+app.include_router(google_oauth_router)
+app.include_router(verify_router)
