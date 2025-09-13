@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
+from slowapi import Limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from app.users import router as user_router
@@ -22,6 +26,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+limiter = Limiter(key_func=lambda request: "global", default_limits=[])
+app.state.limiter = limiter
+app.add_exception_handler(
+    RateLimitExceeded,
+    lambda request, exc: JSONResponse(
+        status_code=429,
+        content={"detail": "Rate limit exceeded. Please try again later."},
+    ),
+)
+app.add_middleware(SlowAPIMiddleware)
 
 app.include_router(user_router)
 app.include_router(chat_router)

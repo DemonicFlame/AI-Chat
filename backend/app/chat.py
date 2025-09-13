@@ -4,6 +4,7 @@ from app.db import messages_collection
 from app.auth import decode_access_token
 from app.schemas.model import ChatMessage
 from app.ai import get_answer
+from app.main import limiter
 from fastapi.responses import StreamingResponse
 from bson import ObjectId
 
@@ -24,6 +25,7 @@ async def get_current_user(request: Request):
 
 
 @router.post("/ask")
+@limiter.limit("5/minute")
 async def ask_question(request: Request, user_id: str = Depends(get_current_user)):
     body = await request.json()
     question = body.get("question", "")
