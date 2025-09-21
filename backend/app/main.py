@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
-from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from fastapi.responses import JSONResponse
@@ -11,6 +10,7 @@ from app.users import router as user_router
 from app.chat import router as chat_router
 from app.google_oauth import router as google_oauth_router
 from app.verify import router as verify_router
+from app.limiter import limiter
 
 app = FastAPI()
 load_dotenv()
@@ -27,7 +27,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-limiter = Limiter(key_func=lambda request: "global", default_limits=[])
 app.state.limiter = limiter
 app.add_exception_handler(
     RateLimitExceeded,
