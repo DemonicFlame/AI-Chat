@@ -27,10 +27,12 @@ const Chat = () => {
       });
       const data = await response.json();
 
-      const mapped: MessageType[] = data.map((msg: any) => ({
-        content: msg.content,
-        isUser: msg.is_user,
-      }));
+      const mapped: MessageType[] = data
+        .flatMap((msg: any) => [
+          { content: msg.question, isUser: true },
+          { content: msg.answer, isUser: false },
+        ])
+        .reverse();
       setMessages(mapped);
     } catch (error) {
       console.error("Error fetching history:", error);
