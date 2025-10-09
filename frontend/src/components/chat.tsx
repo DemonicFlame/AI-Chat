@@ -67,28 +67,6 @@ const Chat = () => {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let completeMessage = "";
-
-      // setMessages((prev) => [...prev, { content: "", isUser: false }]);
-
-      // while (true) {
-      //   const { done, value } = await reader.read();
-      //   if (done) break;
-
-      //   const chunk = decoder.decode(value, { stream: true });
-      //   completeMessage += chunk;
-
-      //   setMessages((prev) => {
-      //     const last = prev[prev.length - 1];
-      //     if (!last || last.isUser) {
-      //       return [...prev, { content: chunk, isUser: false }];
-      //     } else {
-      //       const updated = [...prev];
-      //       updated[updated.length - 1].content += chunk;
-      //       return updated;
-      //     }
-      //   });
-      //   scrollToBottom();
-      // }
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;

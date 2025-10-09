@@ -6,7 +6,6 @@ from app.schemas.model import ChatMessage
 from app.ai import get_answer
 from app.limiter import limiter
 from fastapi.responses import StreamingResponse
-from bson import ObjectId
 
 router = APIRouter()
 
