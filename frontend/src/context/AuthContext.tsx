@@ -16,7 +16,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const verifyEndpoint = "http://localhost:8000/auth/verify";
+const verifyEndpoint = "https://ai-chat-3fjt.onrender.com/auth/verify";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setTokenState] = useState<string | null>(

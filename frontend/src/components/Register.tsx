@@ -17,10 +17,13 @@ const Register = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:8000/register", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://ai-chat-3fjt.onrender.com/register",
+        {
+          email,
+          password,
+        }
+      );
       setToken(res.data.access_token);
     } catch (error) {
       console.error("Registration failed:", error);

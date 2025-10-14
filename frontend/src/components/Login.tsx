@@ -11,7 +11,7 @@ const Login = () => {
   const login = async () => {
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:8000/login", {
+      const res = await axios.post("https://ai-chat-3fjt.onrender.com/login", {
         email,
         password,
       });

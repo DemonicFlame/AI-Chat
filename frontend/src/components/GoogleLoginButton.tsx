@@ -1,6 +1,7 @@
 const GoogleLoginButton = () => {
   const handleLogin = () => {
-    window.location.href = "http://localhost:8000/auth/google-login";
+    window.location.href =
+      "https://ai-chat-3fjt.onrender.com/auth/google-login";
   };
 
   return <button onClick={handleLogin}>Google</button>;

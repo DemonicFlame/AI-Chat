@@ -4,7 +4,7 @@ import styles from "./chat.module.css";
 import { MessageComponent } from "./message.tsx";
 import { useAuth } from "../context/AuthContext.tsx";
 
-const API_URL = "http://localhost:8000/ask";
+const API_URL = "https://ai-chat-3fjt.onrender.com";
 
 const Chat = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -19,7 +19,7 @@ const Chat = () => {
 
   const fetchHistory = async () => {
     try {
-      const response = await fetch("http://localhost:8000/history", {
+      const response = await fetch(`${API_URL}/history`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const Chat = () => {
     setInput("");
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const Chat = () => {
 
   const deleteHistory = async () => {
     try {
-      await fetch("http://localhost:8000/history", {
+      await fetch(`${API_URL}/history`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
