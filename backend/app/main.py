@@ -16,7 +16,7 @@ app = FastAPI()
 load_dotenv()
 
 key = os.getenv("SECRET_KEY")
-app.add_middleware(SessionMiddleware, secret_key=key)
+app.add_middleware(SessionMiddleware, secret_key=key, same_site="none", https_only=True)
 
 origins = []
 app.add_middleware(
