@@ -50,7 +50,7 @@ async def ask_question(request: Request, user_id: str = Depends(get_current_user
 async def get_history(user_id: str = Depends(get_current_user)):
     history = []
     async for msg in messages_collection.find({"user_id": user_id}).sort(
-        "timestamp", -1
+        "timestamp", 1
     ):
         msg["user_id"] = str(msg["user_id"])
         history.append(ChatMessage(**msg))
