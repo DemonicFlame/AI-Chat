@@ -18,7 +18,7 @@ oauth.register(
     client_kwargs={"scope": "openid email"},
 )
 
-FRONTEND_URL = "http://localhost:5173"
+FRONTEND_URL = "https://ai-chat-beta-eight.vercel.app/"
 
 
 @router.get("/auth/google-login")
