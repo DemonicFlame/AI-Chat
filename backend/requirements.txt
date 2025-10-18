@@ -4,7 +4,7 @@ annotated-types==0.7.0
 anyio==4.9.0
 attrs==25.3.0
 Authlib==1.6.1
-bcrypt==4.3.0
+bcrypt==4.0.1
 beautifulsoup4==4.12.2
 cachetools==5.5.2
 certifi==2025.4.26
@@ -53,7 +53,7 @@ mypy_extensions==1.1.0
 numpy==1.26.4
 orjson==3.10.18
 packaging==24.2
-passlib==1.7.5
+passlib==1.7.4
 propcache==0.3.1
 proto-plus==1.26.1
 protobuf==5.29.4
