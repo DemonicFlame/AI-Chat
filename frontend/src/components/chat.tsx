@@ -31,7 +31,6 @@ const Chat = () => {
         { content: msg.question, isUser: true },
         { content: msg.answer, isUser: false },
       ]);
-      // .reverse();
       setMessages(mapped);
     } catch (error) {
       console.error("Error fetching history:", error);

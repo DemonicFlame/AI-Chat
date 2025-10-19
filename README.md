@@ -2,9 +2,9 @@
 
 An intelligent Q&A chatbot app built with FastAPI and React, using LangChain for AI-driven responses. Users can chat, ask questions, and get instant answers powered by AI.
 
-<!--## 🌐 Live Demo
+## 🌐 Live Demo
 
-[Check out the live app here](https://your-app-link.vercel.app) -->
+[Check out the live app here](https://ai-chat-beta-eight.vercel.app/)
 
 ## ⚙️ Tech Stack
 
@@ -12,13 +12,13 @@ An intelligent Q&A chatbot app built with FastAPI and React, using LangChain for
 - **Backend:** FastAPI, Python
 - **Database:** MongoDB
 - **AI Integration:** LangChain, Google Gemini
-<!-- - **Deployment:** Vercel (frontend), Render/your choice (backend) -->
+- **Deployment:** Vercel (frontend), Render (backend)
 
 ## 🚀 Running Locally
 
 ```bash
 # clone the repo
-git clone https://github.com/yourusername/ai-chat-app.git
+git clone https://github.com/DemonicFlame/AI-Chat
 
 # install frontend dependencies
 cd frontend
@@ -28,5 +28,5 @@ npm run dev
 # install backend dependencies
 cd backend
 pip install -r requirements.txt
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
