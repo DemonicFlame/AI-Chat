@@ -14,7 +14,7 @@ An intelligent Q&A chatbot app built with FastAPI and React, using LangChain for
 - **AI Integration:** LangChain, Google Gemini
 - **Deployment:** Vercel (frontend), Render (backend)
 
-## 🚀 Running Locally
+## 🚀 Run It Locally
 
 ```bash
 # clone the repo
